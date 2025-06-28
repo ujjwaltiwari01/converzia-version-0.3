@@ -1,0 +1,8 @@
+streamlit
+pandas
+openai>=1.0.0
+sib-api-v3-sdk
+python-dotenv
+email-validator
+beautifulsoup4
+requests
