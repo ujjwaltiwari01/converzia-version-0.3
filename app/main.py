@@ -14,7 +14,7 @@ INTERVIEW TALKING POINT:
 """
 
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, Request, status
+from fastapi import FastAPI, Request, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from app.core.config import settings
@@ -103,6 +103,12 @@ def root():
 def health_check():
     """Liveness probe for container orchestrators (Kubernetes / Docker Compose)."""
     return {"status": "healthy"}
+
+
+@app.get("/favicon.ico", include_in_schema=False)
+def favicon():
+    """Handle browser favicon request cleanly with 204 No Content."""
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
 if __name__ == "__main__":

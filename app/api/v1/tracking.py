@@ -27,6 +27,20 @@ TRANSPARENT_1X1_PNG = (
 )
 
 
+@router.get("/")
+def tracking_gateway_info():
+    """Information endpoint for the Telemetry & Engagement Tracking Gateway."""
+    return {
+        "service": "Converzia Telemetry Gateway",
+        "status": "operational",
+        "description": "Handles open-tracking pixel dispatch and click-tracking URL redirects.",
+        "endpoints": {
+            "open_pixel": "/api/v1/tracking/pixel/{token}.png",
+            "click_redirect": "/api/v1/tracking/click?token={token}&target={url}"
+        }
+    }
+
+
 @router.get("/pixel/{token_with_ext}")
 def track_open_pixel(token_with_ext: str, db: Session = Depends(get_db)):
     """
